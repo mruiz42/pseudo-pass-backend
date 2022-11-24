@@ -1,5 +1,5 @@
 // handle the API response
-function handleResponse(req, res, statusCode, data, message) {
+function handleResponse(req: any, res: any, statusCode: number, message: string) {
     let isError = false;
     let errorMessage = message;
     switch (statusCode) {
@@ -32,7 +32,8 @@ function handleResponse(req, res, statusCode, data, message) {
         default:
             break;
     }
-    const resObj = data || {};
+    let data;
+    const resObj = data || { error: false, message: ""};
     if (isError) {
         resObj.error = true;
         resObj.message = errorMessage;

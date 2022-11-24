@@ -1,9 +1,11 @@
 {
   "name": "pseudo-pass-backend",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
+    "start": "npx tsc && node ./dist/app.js",
+    "compile": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,16 +13,18 @@
     "url": "git+https://github.com/mruiz42/pseudo-pass-backend.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "PseudoPass Team",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mruiz42/pseudo-pass-backend/issues"
   },
   "homepage": "https://github.com/mruiz42/pseudo-pass-backend#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.14",
     "@types/node": "^18.11.9",
     "typescript": "^4.9.3"
   }
