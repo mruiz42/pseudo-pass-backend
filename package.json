@@ -19,5 +19,9 @@
   "homepage": "https://github.com/mruiz42/pseudo-pass-backend#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "typescript": "^4.9.3"
   }
 }
