@@ -1,44 +1,43 @@
 // handle the API response
-function handleResponse(req: any, res: any, statusCode: number, message: string) {
+const handleResponse = (req: any, res: any, statusCode: any = 200, message?: any) => {
     let isError = false;
-    let errorMessage = message;
+    let responseMessage = message;
     switch (statusCode) {
         case 200:
             isError = false;
-            errorMessage = message || 'OK';
+            responseMessage = message || 'OK';
             break;
         case 204:
+            isError = false;
             return res.sendStatus(204);
         case 400:
             isError = true;
             break;
         case 401:
             isError = true;
-            errorMessage = message || 'Invalid user.';
+            responseMessage = message || 'Invalid user.';
             // clearTokens(req, res);
             break;
         case 403:
             isError = true;
-            errorMessage = message || 'Access to this resource is denied.';
+            responseMessage = message || 'Access to this resource is denied.';
             break;
         case 404:
             isError = true;
-            errorMessage = message || 'Not found';
+            responseMessage = message || 'Not found';
             break;
         case 500:
             isError = true;
-            errorMessage = message || "Internal server error."
+            responseMessage = message || "Internal server error."
             break;
         default:
             break;
     }
-    let data;
-    const resObj = data || { error: false, message: ""};
+    const resObj = { error: false, statusCode: statusCode, message: responseMessage };
     if (isError) {
         resObj.error = true;
-        resObj.message = errorMessage;
     }
     return res.status(statusCode).json(resObj);
 }
 
-export default { handleResponse };
+export { handleResponse };
