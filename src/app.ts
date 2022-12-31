@@ -4,15 +4,14 @@ dotenv.config();
 
 // Express Server
 const app = express();
-const PORT = 4000;
+const PORT = process.env.EXPRESS_PORT;
 // CORS
 
 // Environment
 
 // Routes
 const credentialRoutes = require('./routes/credentialRoutes');
-const didRoutes = require('./routes/didRoutes');
-
+const didRoutes = require('./routes/didsRoutes');
 
 // Define routes
 app.use("/credentials", credentialRoutes);
@@ -26,9 +25,9 @@ app.post('/', (req: { body: { name: any; }; }, res: { send: (arg0: string) => vo
 })
 
 // Start listening on selected port
-app.listen(PORT, (error?: any) => {
+app.listen(PORT || 4000, (error?: any) => {
         if(!error)
-            console.log("Server is Successfully Running, and App is listening on port " + PORT)
+            console.log("Server Running & listening on port " + PORT)
     else
         console.log("Error occurred, server can't start", error);
     }

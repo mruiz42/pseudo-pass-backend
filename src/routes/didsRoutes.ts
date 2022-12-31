@@ -1,9 +1,9 @@
 import express from "express";
 const router = express.Router();
-const {postDids, getDid, getDidByUUID, deleteDidByUUID} = require("../controllers/didController");
+const {createDid, listDids, getDidByUUID, deleteDidByUUID} = require("../controllers/didsController");
 
 router.post('/', (req: any, res: any, next: any) => {
-    postDids(req, res);
+    createDid(req, res);
 });
 
 router.get('/:uuid', (req: any, res: any, next: any) => {
@@ -11,7 +11,7 @@ router.get('/:uuid', (req: any, res: any, next: any) => {
 });
 
 router.get('/', (req: any, res: any, next: any) => {
-    getDid(req, res);
+    listDids(req, res);
 });
 
 router.delete('/:uuid', (req: any, res: any, next: any) => {
