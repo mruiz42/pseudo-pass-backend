@@ -20,9 +20,8 @@ app.use("/dids", didRoutes);
 app.use(express.json());
 app.post('/', (req: { body: { name: any; }; }, res: { send: (arg0: string) => void; })=>{
     const {name} = req.body;
-
     res.send(`Welcome ${name}`);
-})
+});
 
 // Start listening on selected port
 app.listen(PORT || 4000, (error?: any) => {

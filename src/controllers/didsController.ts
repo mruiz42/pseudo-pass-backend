@@ -1,12 +1,14 @@
 import { handleResponse } from "../utils/handleResponse";
 import axios from "axios";
+const DOCKIO_BASE_URL = process.env.DOCKIO_BASE_URL;
 
 exports.listDids = (request: any, response:any) => {
-    axios.get(process.env.DOCKIO_BASE_URL + "/dids", {
-        headers: {"DOCK-API-TOKEN": process.env.DOCKIO_API_KEY}
+    axios.get("/dids", {
+        headers: { "DOCK-API-TOKEN": process.env.DOCKIO_API_KEY },
+        baseURL: DOCKIO_BASE_URL
     })
         .then(res => {
-            console.log(res)
+            console.log(res);
             response.send(res.data);
         })
         .catch(err => {
@@ -15,14 +17,24 @@ exports.listDids = (request: any, response:any) => {
         })
 }
 
-exports.createDid = (req: any, res: any) => {
+exports.createDid = (request: any, response: any) => {
     console.log("/dids/postDids");
-    handleResponse(req, res);
+
+    // handleResponse(req, res);
 }
 
-exports.getDidByUUID = (req: any, res:any) => {
-    console.log("/dids/getDidByUUID");
-    handleResponse(req, res);
+exports.getDidByUUID = (request: any, response:any) => {
+    const req_url = `/dids/${request.params.uuid}`;
+    axios.get(req_url, {
+        headers: { "DOCK-API-TOKEN": process.env.DOCKIO_API_KEY },
+        baseURL: DOCKIO_BASE_URL
+    })
+        .then(res => {
+            response.send(res);
+        })
+        .catch(err => {
+            handleResponse(request, response, 500, err.code);
+        })
 }
 
 exports.getDid = (req: any, res:any) => {
